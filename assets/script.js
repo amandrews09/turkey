@@ -15,7 +15,7 @@ function startQuiz() {
   startBtn.classList.add("hide");
 }
 //timer, counting down from 10
-var count = 9;
+var count = 60;
 function timer() {
   var timer = document.getElementById("time");
   timer.textContent = count;
@@ -23,7 +23,16 @@ function timer() {
   if (count < 0) {
     console.log("stop timer");
     clearInterval(interval);
+    console.log("game over");
+    gameOver();
+
   }
+}
+var gameBoard = document.getElementById("gameBoard")
+function gameOver() {
+var endGame = document.getElementById("endGame")
+  gameBoard.classList.add("hide")
+  endGame.classList.remove("hide")
 }
 //start button listening for click
 var startBtn = document.getElementById("startBtn");
@@ -32,34 +41,29 @@ startBtn.addEventListener("click", startQuiz);
 
 const questions = [
   {
-    questionText: "question 1",
-    answers: ["Q1 answer 1", "Q1 answer 2", "Q1 answer 3"],
-    correct: "answer 3",
+    questionText: "Which of these is NOT a programming language?",
+    answers: ["Java", "Python", "Banana"],
+    correct: "Banana",
   },
   {
-    questionText: "question 2",
-    answers: ["Q2 answer 1", "Q2 answer 2", "Q2 answer 3"],
-    correct: "answer 2",
+    questionText: "What is computer coding",
+    answers: ["a TV show", "tells a computer what to do", "a radio show"],
+    correct: "tells a computer what to do",
   },
   {
-    questionText: "question 3",
-    answers: ["Q3 answer 1", "Q3 answer 2", "Q3 answer 3"],
-    correct: "answer 1",
+    questionText: "What are people who write computer code called?",
+    answers: ["Programmers", "Manufacturers", "Cryptographers"],
+    correct: "tells a computer what to do",
   },
   {
-    questionText: "question 4",
-    answers: ["Q2 answer 1", "Q2 answer 2", "Q2 answer 3"],
-    correct: "answer 2",
+    questionText: "What does HTML stand for?",
+    answers: ["nothing", "Hyper Text Markup Language", "Happy Tappy Mappy Lappy"],
+    correct: "Hyper Text Markup Language",
   },
   {
-    questionText: "question 5",
-    answers: ["Q3 answer 1", "Q3 answer 2", "Q3 answer 3"],
-    correct: "answer 1",
-  },
-  {
-    questionText: "question 6",
-    answers: ["Q3 answer 1", "Q3 answer 2", "Q3 answer 3"],
-    correct: "answer 1",
+    questionText: "What does CSS stand for?",
+    answers: ["Cascading Style Sheets", "Crappy Stuff Sorter", "Crying So Sadly"],
+    correct: "Cascading Style Sheets",
   },
 ];
 // console.log (questions.length)
@@ -67,9 +71,9 @@ const questions = [
 //   console.log (questions[i].answers[1])
 
 // }
-document.body.appendChild(newButton1);
-document.body.appendChild(newButton2);
-document.body.appendChild(newButton3);
+gameBoard.appendChild(newButton1);
+gameBoard.appendChild(newButton2);
+gameBoard.appendChild(newButton3);
 newButton1.classList.add("hide")
 newButton2.classList.add("hide")
 newButton3.classList.add("hide")
@@ -86,12 +90,36 @@ function showQuestion(questionIndex) {
   newButton2.classList.remove("hide")
   newButton3.classList.remove("hide")
 //look for javascript which button is clicked multiple buttons on a page, you're trying to add one event listener for all buttons
-  newButton1.addEventListener("click", function () {
-    // document.body.removeChild(newButton1)
-    console.log("new button");
+  // newButton1.addEventListener("click", function () {
+  //   console.log("new button");
+  //   //else if statement to compare question index to questions.length
+  //   questionIndex = questionIndex + 1;
+  //   showQuestion(questionIndex);
+  // });
 
-    //else if statement to compare question index to questions.length
+  // Get all the buttons on the page
+const buttons = document.querySelectorAll('button');
+// console.log(buttons)
+// Create a function to handle the button click event
+function handleClick(event) {
+  // Handle the button click event here
+  let variable = event.target.textContent;
+  console.log("eventTarget", variable)
+// console.log (questions[questionIndex].correct)
+  if (variable == questions[questionIndex].correct){
+    console.log("true")
     questionIndex = questionIndex + 1;
     showQuestion(questionIndex);
-  });
+  } else {
+    console.log("false")
+    questionIndex = questionIndex + 1;
+    count = count - 10;
+    showQuestion(questionIndex);
+  }
+}
+
+// Attach the event listener to each button
+buttons.forEach(function(button) {
+  button.addEventListener('click', handleClick);
+});
 }
