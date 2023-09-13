@@ -6,10 +6,10 @@ const newButton2 = document.createElement("button");
 const newButton3 = document.createElement("button");
 
 function startQuiz() {
-  console.log("Hello");
+  // console.log("Hello");
   //setting interval for how fast timer counts down
   interval = setInterval(timer, 1000);
-  console.log("arrayGames", questions[questionIndex].questionText);
+  // console.log("arrayGames", questions[questionIndex].questionText);
   // questionIndex = questionIndex+1
   showQuestion(questionIndex);
   startBtn.classList.add("hide");
@@ -20,7 +20,7 @@ function timer() {
   var timer = document.getElementById("time");
   timer.textContent = count;
   count = count - 1;
-  if (count < 0) {
+  if (count <= 0 || questionIndex > questions.length) {
     console.log("stop timer");
     clearInterval(interval);
     console.log("game over");
@@ -53,7 +53,7 @@ const questions = [
   {
     questionText: "What are people who write computer code called?",
     answers: ["Programmers", "Manufacturers", "Cryptographers"],
-    correct: "tells a computer what to do",
+    correct: "Programmers",
   },
   {
     questionText: "What does HTML stand for?",
@@ -71,24 +71,25 @@ const questions = [
 //   console.log (questions[i].answers[1])
 
 // }
+// newButton1.classList.add("hide")
+// newButton2.classList.add("hide")
+// newButton3.classList.add("hide")
+
+function showQuestion(questionIndex) {
+  
 gameBoard.appendChild(newButton1);
 gameBoard.appendChild(newButton2);
 gameBoard.appendChild(newButton3);
-newButton1.classList.add("hide")
-newButton2.classList.add("hide")
-newButton3.classList.add("hide")
-
-function showQuestion(questionIndex) {
-  console.log("show question");
-  console.log(questions[questionIndex]);
+  // console.log("show question");
+  // console.log(questions[questionIndex]);
   questionDiv.innerHTML = questions[questionIndex].questionText;
   
   newButton1.textContent = questions[questionIndex].answers[0];
   newButton2.textContent = questions[questionIndex].answers[1];
   newButton3.textContent = questions[questionIndex].answers[2];
-  newButton1.classList.remove("hide")
-  newButton2.classList.remove("hide")
-  newButton3.classList.remove("hide")
+  // newButton1.classList.remove("hide")
+  // newButton2.classList.remove("hide")
+  // newButton3.classList.remove("hide")
 //look for javascript which button is clicked multiple buttons on a page, you're trying to add one event listener for all buttons
   // newButton1.addEventListener("click", function () {
   //   console.log("new button");
@@ -102,14 +103,22 @@ const buttons = document.querySelectorAll('button');
 // console.log(buttons)
 // Create a function to handle the button click event
 function handleClick(event) {
+  event.stopImmediatePropagation()
   // Handle the button click event here
   let variable = event.target.textContent;
-  console.log("eventTarget", variable)
+  // console.log("eventTarget", variable)
 // console.log (questions[questionIndex].correct)
-  if (variable == questions[questionIndex].correct){
+console.log("answerIs", variable, questions[questionIndex].correct)
+  if (variable === questions[questionIndex].correct){
     console.log("true")
     questionIndex = questionIndex + 1;
-    showQuestion(questionIndex);
+    if (questionIndex < questions.length) {
+      showQuestion(questionIndex);
+    }
+    else {
+      
+    }
+    
   } else {
     console.log("false")
     questionIndex = questionIndex + 1;
