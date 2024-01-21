@@ -10,15 +10,15 @@ body {
 
 header {
     background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
-    padding: 20px;
+    padding: 40px; /* Doubled padding */
     text-align: center;
     width: 100%;
 }
 
 button {
-    margin: 10px;
-    padding: 15px 30px;
-    font-size: 18px;
+    margin: 20px; /* Doubled margin */
+    padding: 30px 60px; /* Doubled padding */
+    font-size: 36px; /* Doubled font size */
     background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
     color: #fff;
     border: none;
@@ -32,7 +32,7 @@ button:hover {
 #gameBoard,
 #endGame {
     background: linear-gradient(to bottom, violet, indigo, blue, green, yellow, orange, red);
-    padding: 20px;
+    padding: 40px; /* Doubled padding */
     text-align: center;
     width: 100%;
 }
@@ -45,8 +45,8 @@ button:hover {
 
 input {
     width: 100%;
-    padding: 10px;
-    font-size: 16px;
+    padding: 20px; /* Doubled padding */
+    font-size: 32px; /* Doubled font size */
 }
 
 @media only screen and (max-width: 600px) {
