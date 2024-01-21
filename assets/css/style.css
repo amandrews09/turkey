@@ -1,10 +1,56 @@
-.hide {
-    display: none;
-    opacity: 0;
+/* Rainbow color theme */
+body {
+    background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+header {
+    background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+    padding: 20px;
+    text-align: center;
+    width: 100%;
 }
 
 button {
-    margin: 0 10px;
+    margin: 10px;
     padding: 10px 20px;
     font-size: 16px;
+    background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+}
+
+#gameBoard,
+#endGame {
+    background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Hide class with rainbow transition */
+.hide {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Center the scoreboard */
+#scoreboardDisplay {
+    text-align: left;
+}
+
+/* Center the "Show Scoreboard" button */
+button#showScoreboardBtn {
+    margin-top: 20px;
 }
