@@ -6,6 +6,35 @@ const newButton2 = document.createElement("button");
 const newButton3 = document.createElement("button");
 
 var score = 0; // Variable to track the score
+var playerInitials; // Variable to store player initials
+
+const questions = [
+    {
+        questionText: "Which of these is NOT a programming language?",
+        answers: ["Java", "Python", "Banana"],
+        correct: "Banana",
+    },
+    {
+        questionText: "What is computer coding",
+        answers: ["a TV show", "tells a computer what to do", "a radio show"],
+        correct: "tells a computer what to do",
+    },
+    {
+        questionText: "What are people who write computer code called?",
+        answers: ["Programmers", "Manufacturers", "Cryptographers"],
+        correct: "Programmers",
+    },
+    {
+        questionText: "What does HTML stand for?",
+        answers: ["nothing", "Hyper Text Markup Language", "Happy Tappy Mappy Lappy"],
+        correct: "Hyper Text Markup Language",
+    },
+    {
+        questionText: "What does CSS stand for?",
+        answers: ["Cascading Style Sheets", "Crappy Stuff Sorter", "Crying So Sadly"],
+        correct: "Cascading Style Sheets",
+    },
+];
 
 function startQuiz() {
     interval = setInterval(timer, 1000);
@@ -35,38 +64,27 @@ function gameOver() {
     // Display the final score
     var scoreDisplay = document.getElementById("score");
     scoreDisplay.textContent = "Your Score: " + score;
+
+    // Create an input field for the player to enter their initials
+    var initialsInput = document.createElement("input");
+    initialsInput.type = "text";
+    initialsInput.placeholder = "Enter your initials";
+    endGame.appendChild(initialsInput);
+
+    // Create a button to submit the initials
+    var submitButton = document.createElement("button");
+    submitButton.textContent = "Submit";
+    submitButton.addEventListener("click", function() {
+        playerInitials = initialsInput.value;
+        console.log("Player Initials:", playerInitials);
+        // You can save the player's initials and score to a database or perform any other desired action
+    });
+
+    endGame.appendChild(submitButton);
 }
 
 var startBtn = document.getElementById("startBtn");
 startBtn.addEventListener("click", startQuiz);
-
-const questions = [
-    {
-        questionText: "Which of these is NOT a programming language?",
-        answers: ["Java", "Python", "Banana"],
-        correct: "Banana",
-    },
-    {
-        questionText: "What is computer coding",
-        answers: ["a TV show", "tells a computer what to do", "a radio show"],
-        correct: "tells a computer what to do",
-    },
-    {
-        questionText: "What are people who write computer code called?",
-        answers: ["Programmers", "Manufacturers", "Cryptographers"],
-        correct: "Programmers",
-    },
-    {
-        questionText: "What does HTML stand for?",
-        answers: ["nothing", "Hyper Text Markup Language", "Happy Tappy Mappy Lappy"],
-        correct: "Hyper Text Markup Language",
-    },
-    {
-        questionText: "What does CSS stand for?",
-        answers: ["Cascading Style Sheets", "Crappy Stuff Sorter", "Crying So Sadly"],
-        correct: "Cascading Style Sheets",
-    },
-];
 
 function showQuestion(questionIndex) {
     gameBoard.appendChild(newButton1);
@@ -107,5 +125,7 @@ function handleClick(event) {
 
     if (questionIndex < questions.length) {
         showQuestion(questionIndex);
+    } else {
+        gameOver();
     }
 }
