@@ -1,3 +1,4 @@
+/* Rainbow color theme */
 body {
     background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
     display: flex;
@@ -10,15 +11,15 @@ body {
 
 header {
     background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
-    padding: 40px; /* Doubled padding */
+    padding: 20px;
     text-align: center;
     width: 100%;
 }
 
 button {
-    margin: 20px; /* Doubled margin */
-    padding: 30px 60px; /* Doubled padding */
-    font-size: 36px; /* Doubled font size */
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
     background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
     color: #fff;
     border: none;
@@ -32,44 +33,45 @@ button:hover {
 #gameBoard,
 #endGame {
     background: linear-gradient(to bottom, violet, indigo, blue, green, yellow, orange, red);
-    padding: 40px; /* Doubled padding */
+    padding: 20px;
     text-align: center;
     width: 100%;
 }
 
+/* Hide class with rainbow transition */
 .hide {
     display: none;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
 }
 
-input {
-    width: 100%;
-    padding: 20px; /* Doubled padding */
-    font-size: 32px; /* Doubled font size */
+/* Center the scoreboard */
+#scoreboardDisplay {
+    text-align: left;
 }
 
-@media only screen and (max-width: 600px) {
-    /* Adjust styles for smaller screens */
-    body {
-        background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
-        /* Adjust other styles for smaller screens */
-    }
+/* Center the "Show Scoreboard" button */
+button#showScoreboardBtn {
+    margin-top: 20px;
+}
 
-    header {
-        /* Adjust header styles for smaller screens */
+/* Fireworks animation */
+@keyframes fireworks {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
     }
+    100% {
+        transform: translateY(-500px) rotate(720deg);
+        opacity: 0;
+    }
+}
 
-    button {
-        /* Adjust button styles for smaller screens */
-    }
-
-    #gameBoard,
-    #endGame {
-        /* Adjust game board and end game styles for smaller screens */
-    }
-
-    .firework {
-        display: none; /* Hide fireworks on smaller screens */
-    }
+.firework {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    animation: fireworks 1s ease-out;
 }

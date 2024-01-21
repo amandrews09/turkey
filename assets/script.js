@@ -118,9 +118,6 @@ function handleClick(event) {
     event.stopImmediatePropagation();
     let variable = event.target.textContent;
 
-    // Play click sound
-    document.getElementById("clickSound").play();
-
     console.log("answerIs", variable, questions[questionIndex].correct);
 
     if (variable === questions[questionIndex].correct) {
@@ -139,28 +136,27 @@ function handleClick(event) {
         gameOver();
     }
 }
-
 // Function to display the scoreboard
 function displayScoreboard() {
-    // Retrieve the scoreboard from local storage
-    var scoreboard = JSON.parse(localStorage.getItem("scoreboard")) || [];
+  // Retrieve the scoreboard from local storage
+  var scoreboard = JSON.parse(localStorage.getItem("scoreboard")) || [];
 
-    // Sort the scoreboard by score in descending order
-    scoreboard.sort(function(a, b) {
-        return b.score - a.score;
-    });
+  // Sort the scoreboard by score in descending order
+  scoreboard.sort(function(a, b) {
+      return b.score - a.score;
+  });
 
-    // Display the scoreboard on the page
-    var scoreboardDisplay = document.createElement("div");
-    scoreboardDisplay.id = "scoreboardDisplay";
-    
-    scoreboard.forEach(function(player, index) {
-        var playerScore = document.createElement("p");
-        playerScore.textContent = `${index + 1}. ${player.initials}: ${player.score}`;
-        scoreboardDisplay.appendChild(playerScore);
-    });
+  // Display the scoreboard on the page
+  var scoreboardDisplay = document.createElement("div");
+  scoreboardDisplay.id = "scoreboardDisplay";
+  
+  scoreboard.forEach(function(player, index) {
+      var playerScore = document.createElement("p");
+      playerScore.textContent = `${index + 1}. ${player.initials}: ${player.score}`;
+      scoreboardDisplay.appendChild(playerScore);
+  });
 
-    document.body.appendChild(scoreboardDisplay);
+  document.body.appendChild(scoreboardDisplay);
 }
 
 // Create a button to show the scoreboard
@@ -170,25 +166,24 @@ showScoreboardBtn.addEventListener("click", displayScoreboard);
 document.body.appendChild(showScoreboardBtn);
 
 function gameOver() {
-    var endGame = document.getElementById("endGame");
-    gameBoard.classList.add("hide");
-    endGame.classList.remove("hide");
+  var endGame = document.getElementById("endGame");
+  gameBoard.classList.add("hide");
+  endGame.classList.remove("hide");
 
-    // Display the final score
-    var scoreDisplay = document.getElementById("score");
-    scoreDisplay.textContent = "Your Score: " + score;
+  // Display the final score
+  var scoreDisplay = document.getElementById("score");
+  scoreDisplay.textContent = "Your Score: " + score;
 
-    // Create and append fireworks
-    createFireworks();
+  // Create and append fireworks
+  createFireworks();
 }
 
 function createFireworks() {
-    for (let i = 0; i < 10; i++) {
-        var firework = document.createElement("div");
-        firework.classList.add("firework");
-        firework.style.left = Math.random() * window.innerWidth + "px";
-        firework.style.top = Math.random() * window.innerHeight + "px";
-        document.body.appendChild(firework);
-    }
+  for (let i = 0; i < 10; i++) {
+      var firework = document.createElement("div");
+      firework.classList.add("firework");
+      firework.style.left = Math.random() * window.innerWidth + "px";
+      firework.style.top = Math.random() * window.innerHeight + "px";
+      document.body.appendChild(firework);
+  }
 }
-
