@@ -18,8 +18,8 @@ header {
 
 button {
     margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 20px 40px;
+    font-size: 32px;
     background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
     color: #fff;
     border: none;
@@ -28,6 +28,11 @@ button {
 
 button:hover {
     background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+}
+
+#question {
+    font-size: 32px;
+    color: white;
 }
 
 #gameBoard,
