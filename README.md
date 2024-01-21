@@ -16,7 +16,8 @@ So, buckle up and prepare for a coding adventure like no other. The Super Simple
 N/A
 
 ## Usage
-
+[screenshot1](assets/Screenshot%202024-01-21%20132204.png)
+[screenshot2](assets/Screenshot%202024-01-21%20132323.png)
 
 ## Credits
 
