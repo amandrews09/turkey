@@ -5,24 +5,112 @@ const newButton1 = document.createElement("button");
 const newButton2 = document.createElement("button");
 const newButton3 = document.createElement("button");
 
-var score = 0; // Variable to track the score
-var playerInitials; // Variable to store player initials
+var score = 0;
+var playerInitials;
+var playerInitialsInput = document.getElementById("playerInitials");
+var submitButton = document.getElementById("submitBtn");
 
-// Declare playerInitialsInput and submitButton outside of the gameOver function
-var playerInitialsInput = document.createElement("input");
-playerInitialsInput.type = "text";
-playerInitialsInput.placeholder = "Enter your initials";
+var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
-var submitButton = document.createElement("button");
-submitButton.textContent = "Submit";
-submitButton.addEventListener("click", function() {
-    playerInitials = playerInitialsInput.value;
-    console.log("Player Initials:", playerInitials);
-    // You can save the player's initials and score to a database or perform any other desired action
-});
+function startQuiz() {
+    interval = setInterval(timer, 1000);
+    showQuestion(questionIndex);
+    startBtn.classList.add("hide");
+}
 
-document.getElementById("endGame").appendChild(playerInitialsInput);
-document.getElementById("endGame").appendChild(submitButton);
+var count = 60;
+
+function timer() {
+    var timer = document.getElementById("time");
+    timer.textContent = count;
+    count = count - 1;
+    if (count <= 0 || questionIndex >= questions.length) {
+        clearInterval(interval);
+        gameOver();
+    }
+}
+
+var gameBoard = document.getElementById("gameBoard");
+
+function gameOver() {
+    var endGame = document.getElementById("endGame");
+    gameBoard.classList.add("hide");
+    endGame.classList.remove("hide");
+
+    var scoreDisplay = document.getElementById("score");
+    scoreDisplay.textContent = "Your Score: " + score;
+
+    playerInitialsInput.style.display = "block";
+    submitButton.style.display = "block";
+    submitButton.addEventListener("click", function() {
+        playerInitials = playerInitialsInput.value;
+        console.log("Player Initials:", playerInitials);
+
+        highScores.push({ initials: playerInitials, score: score });
+        highScores.sort((a, b) => b.score - a.score);
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+
+        displayHighScores();
+    });
+}
+
+function displayHighScores() {
+    var highScoresDiv = document.getElementById("highScores");
+    highScoresDiv.classList.remove("hide");
+
+    var highScoresList = document.getElementById("highScoresList");
+    highScoresList.innerHTML = "";
+    for (var i = 0; i < highScores.length; i++) {
+        var li = document.createElement("li");
+        li.textContent = highScores[i].initials + ": " + highScores[i].score;
+        highScoresList.appendChild(li);
+    }
+}
+
+var startBtn = document.getElementById("startBtn");
+startBtn.addEventListener("click", startQuiz);
+
+function showQuestion(questionIndex) {
+    gameBoard.appendChild(newButton1);
+    gameBoard.appendChild(newButton2);
+    gameBoard.appendChild(newButton3);
+
+    questionDiv.innerHTML = questions[questionIndex].questionText;
+    newButton1.textContent = questions[questionIndex].answers[0];
+    newButton2.textContent = questions[questionIndex].answers[1];
+    newButton3.textContent = questions[questionIndex].answers[2];
+
+    newButton1.removeEventListener('click', handleClick);
+    newButton2.removeEventListener('click', handleClick);
+    newButton3.removeEventListener('click', handleClick);
+
+    newButton1.addEventListener('click', handleClick);
+    newButton2.addEventListener('click', handleClick);
+    newButton3.addEventListener('click', handleClick);
+}
+
+function handleClick(event) {
+    event.stopImmediatePropagation();
+    let variable = event.target.textContent;
+
+    console.log("answerIs", variable, questions[questionIndex].correct);
+
+    if (variable === questions[questionIndex].correct) {
+        console.log("true");
+        score++;
+    } else {
+        console.log("false");
+        count = Math.max(0, count - 10);
+    }
+
+    questionIndex = questionIndex + 1;
+
+    if (questionIndex < questions.length) {
+        showQuestion(questionIndex);
+    } else {
+        gameOver();
+    }
+}
 
 const questions = [
     {
@@ -51,80 +139,3 @@ const questions = [
         correct: "Cascading Style Sheets",
     },
 ];
-
-function startQuiz() {
-    interval = setInterval(timer, 1000);
-    showQuestion(questionIndex);
-    startBtn.classList.add("hide");
-}
-
-var count = 60;
-
-function timer() {
-    var timer = document.getElementById("time");
-    timer.textContent = count;
-    count = count - 1;
-    if (count <= 0 || questionIndex >= questions.length) {
-        clearInterval(interval);
-        gameOver();
-    }
-}
-
-var gameBoard = document.getElementById("gameBoard");
-
-function gameOver() {
-    var endGame = document.getElementById("endGame");
-    gameBoard.classList.add("hide");
-    endGame.classList.remove("hide");
-
-    // Display the final score
-    var scoreDisplay = document.getElementById("score");
-    scoreDisplay.textContent = "Your Score: " + score;
-}
-
-var startBtn = document.getElementById("startBtn");
-startBtn.addEventListener("click", startQuiz);
-
-function showQuestion(questionIndex) {
-    gameBoard.appendChild(newButton1);
-    gameBoard.appendChild(newButton2);
-    gameBoard.appendChild(newButton3);
-
-    questionDiv.innerHTML = questions[questionIndex].questionText;
-    newButton1.textContent = questions[questionIndex].answers[0];
-    newButton2.textContent = questions[questionIndex].answers[1];
-    newButton3.textContent = questions[questionIndex].answers[2];
-
-    // Clear previous event listeners
-    newButton1.removeEventListener('click', handleClick);
-    newButton2.removeEventListener('click', handleClick);
-    newButton3.removeEventListener('click', handleClick);
-
-    // Attach event listeners to each button
-    newButton1.addEventListener('click', handleClick);
-    newButton2.addEventListener('click', handleClick);
-    newButton3.addEventListener('click', handleClick);
-}
-
-function handleClick(event) {
-    event.stopImmediatePropagation();
-    let variable = event.target.textContent;
-
-    console.log("answerIs", variable, questions[questionIndex].correct);
-
-    if (variable === questions[questionIndex].correct) {
-        console.log("true");
-        score++; // Increment the score for correct answers
-    } else {
-        console.log("false");
-        count = Math.max(0, count - 10);
-    }
-
-    questionIndex = questionIndex + 1;
-
-    if (questionIndex < questions.length) {
-        showQuestion(questionIndex);
-    } else {
-        gameOver();
-    }
-}
