@@ -8,6 +8,22 @@ const newButton3 = document.createElement("button");
 var score = 0; // Variable to track the score
 var playerInitials; // Variable to store player initials
 
+// Declare playerInitialsInput and submitButton outside of the gameOver function
+var playerInitialsInput = document.createElement("input");
+playerInitialsInput.type = "text";
+playerInitialsInput.placeholder = "Enter your initials";
+
+var submitButton = document.createElement("button");
+submitButton.textContent = "Submit";
+submitButton.addEventListener("click", function() {
+    playerInitials = playerInitialsInput.value;
+    console.log("Player Initials:", playerInitials);
+    // You can save the player's initials and score to a database or perform any other desired action
+});
+
+document.getElementById("endGame").appendChild(playerInitialsInput);
+document.getElementById("endGame").appendChild(submitButton);
+
 const questions = [
     {
         questionText: "Which of these is NOT a programming language?",
@@ -64,23 +80,6 @@ function gameOver() {
     // Display the final score
     var scoreDisplay = document.getElementById("score");
     scoreDisplay.textContent = "Your Score: " + score;
-
-    // Create an input field for the player to enter their initials
-    var initialsInput = document.createElement("input");
-    initialsInput.type = "text";
-    initialsInput.placeholder = "Enter your initials";
-    endGame.appendChild(initialsInput);
-
-    // Create a button to submit the initials
-    var submitButton = document.createElement("button");
-    submitButton.textContent = "Submit";
-    submitButton.addEventListener("click", function() {
-        playerInitials = initialsInput.value;
-        console.log("Player Initials:", playerInitials);
-        // You can save the player's initials and score to a database or perform any other desired action
-    });
-
-    endGame.appendChild(submitButton);
 }
 
 var startBtn = document.getElementById("startBtn");
