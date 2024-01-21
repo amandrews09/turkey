@@ -1,4 +1,3 @@
-/* Rainbow color theme */
 body {
     background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
     display: flex;
@@ -18,8 +17,8 @@ header {
 
 button {
     margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 15px 30px;
+    font-size: 18px;
     background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
     color: #fff;
     border: none;
@@ -38,40 +37,39 @@ button:hover {
     width: 100%;
 }
 
-/* Hide class with rainbow transition */
 .hide {
     display: none;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
 }
 
-/* Center the scoreboard */
-#scoreboardDisplay {
-    text-align: left;
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
 }
 
-/* Center the "Show Scoreboard" button */
-button#showScoreboardBtn {
-    margin-top: 20px;
-}
-
-/* Fireworks animation */
-@keyframes fireworks {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
+@media only screen and (max-width: 600px) {
+    /* Adjust styles for smaller screens */
+    body {
+        background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+        /* Adjust other styles for smaller screens */
     }
-    100% {
-        transform: translateY(-500px) rotate(720deg);
-        opacity: 0;
-    }
-}
 
-.firework {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: #fff;
-    border-radius: 50%;
-    animation: fireworks 1s ease-out;
+    header {
+        /* Adjust header styles for smaller screens */
+    }
+
+    button {
+        /* Adjust button styles for smaller screens */
+    }
+
+    #gameBoard,
+    #endGame {
+        /* Adjust game board and end game styles for smaller screens */
+    }
+
+    .firework {
+        display: none; /* Hide fireworks on smaller screens */
+    }
 }
