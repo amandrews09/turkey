@@ -9,12 +9,12 @@ body {
     margin: 0;
 }
 
-header {
+/* header {
     background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
     padding: 20px;
     text-align: center;
     width: 100%;
-}
+} */
 
 button {
     margin: 10px;
