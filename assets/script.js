@@ -164,3 +164,26 @@ var showScoreboardBtn = document.createElement("button");
 showScoreboardBtn.textContent = "Show Scoreboard";
 showScoreboardBtn.addEventListener("click", displayScoreboard);
 document.body.appendChild(showScoreboardBtn);
+
+function gameOver() {
+  var endGame = document.getElementById("endGame");
+  gameBoard.classList.add("hide");
+  endGame.classList.remove("hide");
+
+  // Display the final score
+  var scoreDisplay = document.getElementById("score");
+  scoreDisplay.textContent = "Your Score: " + score;
+
+  // Create and append fireworks
+  createFireworks();
+}
+
+function createFireworks() {
+  for (let i = 0; i < 10; i++) {
+      var firework = document.createElement("div");
+      firework.classList.add("firework");
+      firework.style.left = Math.random() * window.innerWidth + "px";
+      firework.style.top = Math.random() * window.innerHeight + "px";
+      document.body.appendChild(firework);
+  }
+}
